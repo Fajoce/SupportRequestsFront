@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChangeDetectorRef } from '@angular/core';
 import { SupportRequestService } 
 from '../../services/support-requestService';
-
+import { MatIconModule } from '@angular/material/icon';
 import { SupportRequestModelTs } from '../../models/support-request.model.ts'; 
 
 @Component({
@@ -15,7 +15,8 @@ standalone: true,
 imports: [
 CommonModule,
 MatCardModule,
-MatButtonModule
+MatButtonModule,
+MatIconModule
 ],
  templateUrl: './request-detail.html',
   styleUrl: './request-detail.css',

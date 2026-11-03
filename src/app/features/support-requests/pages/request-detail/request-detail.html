@@ -1,55 +1,86 @@
 <mat-card class="detail-card" *ngIf="request">
 
     <mat-card-header>
+
+        <mat-icon mat-card-avatar>
+            assignment
+        </mat-icon>
+
         <mat-card-title>
-            Detalle de la solicitud
+            Detalle de solicitud
         </mat-card-title>
 
         <mat-card-subtitle>
-            {{request.id}}
+            ID: {{request.id}}
         </mat-card-subtitle>
+
     </mat-card-header>
+
 
     <mat-card-content>
 
+
         <div class="detail-grid">
 
-            <div class="field">
-                <label>Categoría: </label>
-                <span>{{request.category}}</span>
-            </div>
 
             <div class="field">
-                <label>Prioridad: </label>
-                <span class="priority"
-                      [ngClass]="{
-                        'low': request.priority === 'Low',
-                        'medium': request.priority === 'Medium',
-                        'high': request.priority === 'High'
-                      }">
-                    {{request.priority}}
+
+                <label>Categoría</label>
+
+                <span>
+                    {{request.category}}
                 </span>
+
             </div>
+
+
+            <div class="field">
+
+                <label>Prioridad</label>
+
+                <span
+                class="badge"
+                [ngClass]="request.priority.toLowerCase()">
+
+                    {{request.priority}}
+
+                </span>
+
+            </div>
+
+
 
             <div class="field full-width">
-                <label>Descripción: </label>
-                <span>{{ request.description}}</span>
+
+                <label>Descripción</label>
+
+                <p>
+                    {{request.description}}
+                </p>
+
             </div>
 
-            <div class="field">
-                <label>Solicitante: </label>
-                <span>{{request.requester}}</span>
-            </div>
+
 
             <div class="field">
+
+                <label>Solicitante</label>
+
+                <span>
+                    {{request.requester}}
+                </span>
+
+            </div>
+
+
+
+            <div class="field">
+
                 <label>Estado</label>
 
-                <span class="status"
-                      [ngClass]="{
-                        'pending': request.status === 'Pending',
-                        'approved': request.status === 'Approved',
-                        'rejected': request.status === 'Rejected'
-                      }">
+                <span
+                class="badge"
+                [ngClass]="request.status.toLowerCase()">
 
                     {{request.status}}
 
@@ -57,35 +88,64 @@
 
             </div>
 
-            <div class="field">
-                <label>Fecha de solicitud: </label>
-                <span>{{request.requestDate | date:'dd/MM/yyyy HH:mm'}}</span>
-            </div>
+
 
             <div class="field">
-               <b><label>Fecha decisión: </label></b> 
+
+                <label>Fecha solicitud</label>
+
                 <span>
-                    {{ request.decisionDate
-                        ? (request.decisionDate | date:'dd/MM/yyyy HH:mm')
-                        : 'Pendiente'
-                    }}
+                    {{request.requestDate 
+                    | date:'dd/MM/yyyy HH:mm'}}
                 </span>
+
             </div>
+
+
+
+            <div class="field">
+
+                <label>Fecha decisión</label>
+
+                <span>
+
+                    {{
+                    request.decisionDate
+                    ?
+                    (request.decisionDate 
+                    | date:'dd/MM/yyyy HH:mm')
+                    :
+                    'Pendiente'
+                    }}
+
+                </span>
+
+            </div>
+
 
         </div>
 
+
     </mat-card-content>
+
+
 
     <mat-card-actions align="end">
 
+
         <button
             mat-stroked-button
-            color="primary"
             (click)="back()">
+
+            <mat-icon>
+                arrow_back
+            </mat-icon>
 
             Volver
 
         </button>
+
+
 
         <button
             mat-raised-button
@@ -93,9 +153,15 @@
             *ngIf="request.status === 'Pending'"
             (click)="approve()">
 
+            <mat-icon>
+                check
+            </mat-icon>
+
             Aprobar
 
         </button>
+
+
 
         <button
             mat-raised-button
@@ -103,10 +169,16 @@
             *ngIf="request.status === 'Pending'"
             (click)="reject()">
 
+            <mat-icon>
+                close
+            </mat-icon>
+
             Rechazar
 
         </button>
 
+
     </mat-card-actions>
+
 
 </mat-card>
