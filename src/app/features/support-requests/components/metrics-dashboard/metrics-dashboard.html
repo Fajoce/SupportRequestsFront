@@ -1,51 +1,93 @@
 <div class="metrics-container">
 
 
-<mat-card>
+    <mat-card class="metric-card total">
 
-<h3>Total</h3>
+        <div class="metric-header">
 
-<h1>
-{{metrics?.total}}
-</h1>
+            <mat-icon>
+                assignment
+            </mat-icon>
 
-</mat-card>
+            <span>Total</span>
+
+        </div>
 
 
+        <h1>
+            {{metrics?.total || 0}}
+        </h1>
 
-<mat-card>
 
-<h3>Pendientes</h3>
-
-<h1>
-{{metrics?.pending}}
-</h1>
-
-</mat-card>
+    </mat-card>
 
 
 
-<mat-card>
+    <mat-card class="metric-card pending">
 
-<h3>Aprobadas</h3>
+        <div class="metric-header">
 
-<h1>
-{{metrics?.approved}}
-</h1>
+            <mat-icon>
+                schedule
+            </mat-icon>
 
-</mat-card>
+            <span>Pendientes</span>
+
+        </div>
+
+
+        <h1>
+            {{metrics?.pending || 0}}
+        </h1>
+
+
+    </mat-card>
 
 
 
-<mat-card>
 
-<h3>Rechazadas</h3>
+    <mat-card class="metric-card approved">
 
-<h1>
-{{metrics?.rejected}}
-</h1>
+        <div class="metric-header">
 
-</mat-card>
+            <mat-icon>
+                check_circle
+            </mat-icon>
+
+            <span>Aprobadas</span>
+
+        </div>
+
+
+        <h1>
+            {{metrics?.approved || 0}}
+        </h1>
+
+
+    </mat-card>
+
+
+
+
+    <mat-card class="metric-card rejected">
+
+        <div class="metric-header">
+
+            <mat-icon>
+                cancel
+            </mat-icon>
+
+            <span>Rechazadas</span>
+
+        </div>
+
+
+        <h1>
+            {{metrics?.rejected || 0}}
+        </h1>
+
+
+    </mat-card>
 
 
 </div>

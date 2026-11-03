@@ -9,7 +9,7 @@ from '@angular/material/card';
 
 import { SupportRequestService } from '../../services/support-requestService';
 
-
+import { MatIconModule } from '@angular/material/icon';
 import { Metrics }
 from '../../models/metrics.model';
 
@@ -24,7 +24,7 @@ standalone:true,
 imports:[
 
 CommonModule,
-
+MatIconModule,
 MatCardModule
 
 ],
