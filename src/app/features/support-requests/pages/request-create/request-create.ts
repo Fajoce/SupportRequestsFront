@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 import {
  FormBuilder,
@@ -50,34 +53,30 @@ import { SupportRequestService } from '../../services/support-requestService';
   standalone:true,
 
 imports:[
-
 CommonModule,
-
 ReactiveFormsModule,
-
 MatCardModule,
-
 MatButtonModule,
-
 MatInputModule,
-
-MatSelectModule
-
+MatSelectModule,
+  MatDatepickerModule,
+    MatNativeDateModule
 ],
+ providers: [
+    provideNativeDateAdapter()
+  ],
   templateUrl: './request-create.html',
   styleUrl: './request-create.css',
 })
 export class RequestCreate {
+  maxDate = new Date();
 form:FormGroup;
-
-
-
 constructor(
 
 private fb:FormBuilder,
 
 private service:SupportRequestService,
-
+ private snackBar: MatSnackBar,
 private router:Router
 
 ){
@@ -106,12 +105,9 @@ Validators.required
 ],
 
 
-requestDate:[
-new Date()
-.toISOString()
-.substring(0,10),
-
-Validators.required
+requestDate: [
+  new Date(),
+  Validators.required
 ],
 
 
@@ -131,37 +127,63 @@ Validators.required
 
 save(){
 
+  if(this.form.invalid){
 
-if(this.form.invalid){
+    this.form.markAllAsTouched();
 
-this.form.markAllAsTouched();
+    this.snackBar.open(
+      'Por favor complete los campos obligatorios',
+      'Cerrar',
+      {
+        duration:3000
+      }
+    );
 
-return;
+    return;
+  }
 
+
+  this.service.create(
+    this.form.value
+  )
+  .subscribe({
+    next:()=>{
+      this.snackBar.open(
+        'Solicitud creada correctamente',
+        'Cerrar',
+        {
+          duration:3000
+        }
+      );
+
+
+      this.router.navigate(['/']);
+    },
+    error:(error)=>{
+      console.error(
+        'Error creando solicitud:',
+        error
+      );
+      let message =
+      'Ocurrió un error al crear la solicitud';
+      // Error enviado por tu Middleware .NET
+      if(error.error?.message){
+        message = error.error.message;
+      }
+
+
+      this.snackBar.open(
+        message,
+        'Cerrar',
+        {
+          duration:5000
+        }
+      );
+    }
+
+  });
+
+}
 }
 
 
-
-this.service.create(
-this.form.value
-)
-.subscribe({
-
-next:()=>{
-
-alert(
-'Solicitud creada correctamente'
-);
-
-
-this.router.navigate(['/']);
-
-}
-
-
-});
-
-
-}
-
-}

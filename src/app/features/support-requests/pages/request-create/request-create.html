@@ -84,24 +84,31 @@
 
         <!-- Fecha -->
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="full-width">
 
-            <mat-label>
-                Fecha solicitud
-            </mat-label>
+    <mat-label>Fecha de solicitud</mat-label>
 
+    <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="requestDate"
+        [max]="maxDate">
 
-            <input
+    <mat-datepicker-toggle
+        matSuffix
+        [for]="picker">
+    </mat-datepicker-toggle>
 
-                matInput
+    <mat-datepicker #picker></mat-datepicker>
 
-                type="date"
+    <mat-error
+        *ngIf="form.get('requestDate')?.hasError('required')">
 
-                formControlName="requestDate">
+        La fecha es obligatoria
 
+    </mat-error>
 
-        </mat-form-field>
-
+</mat-form-field>
 
 
 

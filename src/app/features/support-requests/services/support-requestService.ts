@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-
-
 import { SupportRequestModelTs } from '../models/support-request.model.ts.js';
 import { Metrics } from '../models/metrics.model.js';
 import { CreateSupportRequestDto } from '../dtos/CreateSupportRequestDto .js';
 import { environment } from '../../../../environments/environment.js';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
- 
-
-
 
 @Injectable({
 providedIn:'root'
@@ -24,18 +19,13 @@ constructor(
 private http:HttpClient
 ){}
 
-
-
 getAll():
 Observable<SupportRequestModelTs[]>{
 
 return this.http.get<SupportRequestModelTs[]>(
 this.apiUrl
 );
-
 }
-
-
 
 getById(
 id:string
@@ -64,6 +54,7 @@ return this.http.put(
 {}
 );
 }
+
 reject(
 id:string
 ){
@@ -71,15 +62,11 @@ return this.http.put(
 `${this.apiUrl}/${id}/reject`,
 {}
 );
-
 }
 
 getMetrics(){
-
     return this.http.get<Metrics>(
         `${this.apiUrl}/metrics`
     );
-
 }
-
 }

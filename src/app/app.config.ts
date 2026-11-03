@@ -11,6 +11,7 @@ import {
 
 
 import { routes } from './app.routes';
+import { httpErrorInterceptor } from '../core/interceptors/http-error.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,7 +21,11 @@ providers:[
     provideRouter(routes),
 
 
-    provideHttpClient()
+    provideHttpClient(
+    withInterceptors([
+        httpErrorInterceptor
+    ])
+)
 
 ]
 
