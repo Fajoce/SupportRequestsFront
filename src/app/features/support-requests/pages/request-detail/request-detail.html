@@ -1,0 +1,112 @@
+<mat-card class="detail-card" *ngIf="request">
+
+    <mat-card-header>
+        <mat-card-title>
+            Detalle de la solicitud
+        </mat-card-title>
+
+        <mat-card-subtitle>
+            {{request.id}}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <div class="detail-grid">
+
+            <div class="field">
+                <label>Categoría: </label>
+                <span>{{request.category}}</span>
+            </div>
+
+            <div class="field">
+                <label>Prioridad: </label>
+                <span class="priority"
+                      [ngClass]="{
+                        'low': request.priority === 'Low',
+                        'medium': request.priority === 'Medium',
+                        'high': request.priority === 'High'
+                      }">
+                    {{request.priority}}
+                </span>
+            </div>
+
+            <div class="field full-width">
+                <label>Descripción: </label>
+                <span>{{ request.description}}</span>
+            </div>
+
+            <div class="field">
+                <label>Solicitante: </label>
+                <span>{{request.requester}}</span>
+            </div>
+
+            <div class="field">
+                <label>Estado</label>
+
+                <span class="status"
+                      [ngClass]="{
+                        'pending': request.status === 'Pending',
+                        'approved': request.status === 'Approved',
+                        'rejected': request.status === 'Rejected'
+                      }">
+
+                    {{request.status}}
+
+                </span>
+
+            </div>
+
+            <div class="field">
+                <label>Fecha de solicitud: </label>
+                <span>{{request.requestDate | date:'dd/MM/yyyy HH:mm'}}</span>
+            </div>
+
+            <div class="field">
+               <b><label>Fecha decisión: </label></b> 
+                <span>
+                    {{ request.decisionDate
+                        ? (request.decisionDate | date:'dd/MM/yyyy HH:mm')
+                        : 'Pendiente'
+                    }}
+                </span>
+            </div>
+
+        </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+
+        <button
+            mat-stroked-button
+            color="primary"
+            (click)="back()">
+
+            Volver
+
+        </button>
+
+        <button
+            mat-raised-button
+            color="primary"
+            *ngIf="request.status === 'Pending'"
+            (click)="approve()">
+
+            Aprobar
+
+        </button>
+
+        <button
+            mat-raised-button
+            color="warn"
+            *ngIf="request.status === 'Pending'"
+            (click)="reject()">
+
+            Rechazar
+
+        </button>
+
+    </mat-card-actions>
+
+</mat-card>

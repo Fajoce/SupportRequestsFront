@@ -1,0 +1,55 @@
+.detail-container{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+
+.detail-item{
+
+display:flex;
+
+gap:10px;
+
+font-size:16px;
+
+}
+
+
+
+mat-card{
+
+max-width:800px;
+
+margin:30px auto;
+
+padding:20px;
+
+}
+
+mat-card-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:20px;
+
+}
+
+.field label{
+    font-weight:700;
+    font-size:15px;
+    color:#212121;
+    margin-bottom:6px;
+}
+
+.field span{
+    font-size:16px;
+    color:#424242;
+}

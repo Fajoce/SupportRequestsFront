@@ -1,0 +1,203 @@
+<form 
+    [formGroup]="form"
+    (ngSubmit)="save()"
+    class="request-form">
+
+
+    <div class="form-grid">
+
+
+        <!-- Categoría -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>
+                Categoría de soporte
+            </mat-label>
+
+
+            <mat-select formControlName="category">
+
+                <mat-option [value]="1">
+                    Software
+                </mat-option>
+
+                <mat-option [value]="2">
+                    Hardware
+                </mat-option>
+
+                <mat-option [value]="3">
+                    Acceso
+                </mat-option>
+
+            </mat-select>
+
+
+            <mat-error>
+                Categoría obligatoria
+            </mat-error>
+
+
+        </mat-form-field>
+
+
+
+        <!-- Prioridad -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>
+                Prioridad
+            </mat-label>
+
+
+            <mat-select formControlName="priority">
+
+
+                <mat-option [value]="1">
+                    Baja
+                </mat-option>
+
+
+                <mat-option [value]="2">
+                    Media
+                </mat-option>
+
+
+                <mat-option [value]="3">
+                    Alta
+                </mat-option>
+
+
+            </mat-select>
+
+
+            <mat-error>
+                Prioridad obligatoria
+            </mat-error>
+
+
+        </mat-form-field>
+
+
+
+
+        <!-- Fecha -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>
+                Fecha solicitud
+            </mat-label>
+
+
+            <input
+
+                matInput
+
+                type="date"
+
+                formControlName="requestDate">
+
+
+        </mat-form-field>
+
+
+
+
+        <!-- Solicitante -->
+
+        <mat-form-field appearance="outline">
+
+
+            <mat-label>
+                Solicitante
+            </mat-label>
+
+
+            <input
+
+                matInput
+
+                placeholder="Nombre completo"
+
+                formControlName="requester">
+
+
+        </mat-form-field>
+
+
+
+    </div>
+
+
+
+
+    <!-- Descripción completa -->
+
+
+    <mat-form-field 
+        appearance="outline"
+        class="description">
+
+
+        <mat-label>
+            Descripción del requerimiento
+        </mat-label>
+
+
+        <textarea
+
+            matInput
+
+            rows="5"
+
+            placeholder="Detalle la necesidad de soporte"
+
+            formControlName="description">
+
+        </textarea>
+
+
+    </mat-form-field>
+
+
+
+
+    <!-- Botones -->
+
+
+    <div class="actions">
+
+
+        <button
+
+            mat-stroked-button
+
+            type="button"
+
+            routerLink="/">
+
+            Cancelar
+
+        </button>
+
+
+
+        <button
+
+            mat-raised-button
+
+            color="primary"
+
+            type="submit"
+
+            [disabled]="form.invalid">
+
+
+            Crear solicitud
+
+        </button>
+
+    </div>
+</form>
