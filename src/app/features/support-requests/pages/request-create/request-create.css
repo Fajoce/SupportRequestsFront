@@ -82,3 +82,56 @@ mat-form-field {
 
 
 }
+.request-form{
+
+    max-width:900px;
+
+    margin:20px auto;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    margin-bottom:10px;
+
+}
+
+.description{
+
+    width:100%;
+
+}
+
+textarea{
+
+    resize:none;
+
+}
+
+mat-card-content{
+
+    padding-top:10px;
+
+}
+
+mat-card-actions{
+
+    padding:16px 24px;
+
+}
+
+@media(max-width:768px){
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

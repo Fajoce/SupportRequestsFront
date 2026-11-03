@@ -1,210 +1,131 @@
-<form 
-    [formGroup]="form"
-    (ngSubmit)="save()"
-    class="request-form">
+<form [formGroup]="form"
+      (ngSubmit)="save()"
+      class="request-form">
 
+    <mat-card>
 
-    <div class="form-grid">
+        <mat-card-header>
 
+            <mat-card-title>
+                Nueva solicitud de soporte
+            </mat-card-title>
 
-        <!-- Categoría -->
+        </mat-card-header>
 
-        <mat-form-field appearance="outline">
+        <mat-card-content>
 
-            <mat-label>
-                Categoría de soporte
-            </mat-label>
+            <div class="form-grid">
 
+                <!-- Categoría -->
 
-            <mat-select formControlName="category">
+                <mat-form-field appearance="outline">
 
-                <mat-option [value]="1">
-                    Software
-                </mat-option>
+                    <mat-label>Categoría</mat-label>
 
-                <mat-option [value]="2">
-                    Hardware
-                </mat-option>
+                    <mat-select formControlName="category">
 
-                <mat-option [value]="3">
-                    Acceso
-                </mat-option>
+                        <mat-option [value]="1">Software</mat-option>
 
-            </mat-select>
+                        <mat-option [value]="2">Hardware</mat-option>
 
+                        <mat-option [value]="3">Acceso</mat-option>
 
-            <mat-error>
-                Categoría obligatoria
-            </mat-error>
+                    </mat-select>
 
+                </mat-form-field>
 
-        </mat-form-field>
+                <!-- Prioridad -->
 
+                <mat-form-field appearance="outline">
 
+                    <mat-label>Prioridad</mat-label>
 
-        <!-- Prioridad -->
+                    <mat-select formControlName="priority">
 
-        <mat-form-field appearance="outline">
+                        <mat-option [value]="1">Baja</mat-option>
 
-            <mat-label>
-                Prioridad
-            </mat-label>
+                        <mat-option [value]="2">Media</mat-option>
 
+                        <mat-option [value]="3">Alta</mat-option>
 
-            <mat-select formControlName="priority">
+                    </mat-select>
 
+                </mat-form-field>
 
-                <mat-option [value]="1">
-                    Baja
-                </mat-option>
+                <!-- Solicitante -->
 
+                <mat-form-field appearance="outline">
 
-                <mat-option [value]="2">
-                    Media
-                </mat-option>
+                    <mat-label>Solicitante</mat-label>
 
+                    <input
+                        matInput
+                        formControlName="requester">
 
-                <mat-option [value]="3">
-                    Alta
-                </mat-option>
+                </mat-form-field>
 
+                <!-- Fecha -->
 
-            </mat-select>
+                <mat-form-field appearance="outline">
 
+                    <mat-label>Fecha</mat-label>
 
-            <mat-error>
-                Prioridad obligatoria
-            </mat-error>
+                    <input
+                        matInput
+                        [matDatepicker]="picker"
+                        formControlName="requestDate"
+                        [max]="maxDate">
 
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker">
+                    </mat-datepicker-toggle>
 
-        </mat-form-field>
+                    <mat-datepicker #picker></mat-datepicker>
 
+                </mat-form-field>
 
+            </div>
 
+            <!-- Descripción -->
 
-        <!-- Fecha -->
+            <mat-form-field
+                appearance="outline"
+                class="description">
 
-        <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Descripción</mat-label>
 
-    <mat-label>Fecha de solicitud</mat-label>
+                <textarea
+                    matInput
+                    rows="3"
+                    formControlName="description">
+                </textarea>
 
-    <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="requestDate"
-        [max]="maxDate">
+            </mat-form-field>
 
-    <mat-datepicker-toggle
-        matSuffix
-        [for]="picker">
-    </mat-datepicker-toggle>
+        </mat-card-content>
 
-    <mat-datepicker #picker></mat-datepicker>
+        <mat-card-actions align="end">
 
-    <mat-error
-        *ngIf="form.get('requestDate')?.hasError('required')">
+            <button
+                mat-stroked-button
+                routerLink="/">
 
-        La fecha es obligatoria
+                Cancelar
 
-    </mat-error>
+            </button>
 
-</mat-form-field>
+            <button
+                mat-raised-button
+                color="primary"
+                type="submit">
 
+                Guardar
 
+            </button>
 
-        <!-- Solicitante -->
+        </mat-card-actions>
 
-        <mat-form-field appearance="outline">
+    </mat-card>
 
-
-            <mat-label>
-                Solicitante
-            </mat-label>
-
-
-            <input
-
-                matInput
-
-                placeholder="Nombre completo"
-
-                formControlName="requester">
-
-
-        </mat-form-field>
-
-
-
-    </div>
-
-
-
-
-    <!-- Descripción completa -->
-
-
-    <mat-form-field 
-        appearance="outline"
-        class="description">
-
-
-        <mat-label>
-            Descripción del requerimiento
-        </mat-label>
-
-
-        <textarea
-
-            matInput
-
-            rows="5"
-
-            placeholder="Detalle la necesidad de soporte"
-
-            formControlName="description">
-
-        </textarea>
-
-
-    </mat-form-field>
-
-
-
-
-    <!-- Botones -->
-
-
-    <div class="actions">
-
-
-        <button
-
-            mat-stroked-button
-
-            type="button"
-
-            routerLink="/">
-
-            Cancelar
-
-        </button>
-
-
-
-        <button
-
-            mat-raised-button
-
-            color="primary"
-
-            type="submit"
-
-            [disabled]="form.invalid">
-
-
-            Crear solicitud
-
-        </button>
-
-    </div>
 </form>
