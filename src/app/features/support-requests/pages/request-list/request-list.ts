@@ -10,6 +10,7 @@ import { SupportRequestModelTs } from '../../models/support-request.model.ts';
 import { FormsModule } from '@angular/forms';
 import { MetricsDashboard } from '../../components/metrics-dashboard/metrics-dashboard';
 import { Router, RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-request-list',
@@ -23,6 +24,7 @@ import { Router, RouterLink } from '@angular/router';
     MatSelectModule,
     MatProgressSpinnerModule,
     MetricsDashboard,
+    MatIconModule
   ],
   standalone: true,
   templateUrl: './request-list.html',

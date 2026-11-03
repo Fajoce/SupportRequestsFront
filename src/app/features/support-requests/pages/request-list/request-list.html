@@ -1,205 +1,158 @@
-<div class="actions-header">
+<div class="page-container">
 
-    <button
-        mat-raised-button
-        color="primary"
-        routerLink="/create">
+    <div class="page-header">
 
-        Nueva solicitud
+        <h2>Solicitudes de soporte</h2>
 
-    </button>
+        <button
+            mat-raised-button
+            color="primary"
+            routerLink="/create">
+
+            <mat-icon>add</mat-icon>
+
+            Nueva solicitud
+
+        </button>
+
+    </div>
+
+    <app-metrics-dashboard></app-metrics-dashboard>
+
+    <mat-card class="filter-card">
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline">
+
+                <mat-label>Estado</mat-label>
+
+                <mat-select
+                    [(ngModel)]="selectedStatus"
+                    (selectionChange)="filter()">
+
+                    <mat-option value="">Todos</mat-option>
+                    <mat-option value="Pending">Pendiente</mat-option>
+                    <mat-option value="Approved">Aprobada</mat-option>
+                    <mat-option value="Rejected">Rechazada</mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </mat-card-content>
+
+    </mat-card>
+
+    <div class="spinner-container" *ngIf="loading">
+
+        <mat-spinner diameter="40"></mat-spinner>
+
+    </div>
+
+    <div class="table-container" *ngIf="!loading">
+
+        <table
+            mat-table
+            [dataSource]="filteredRequests"
+            class="mat-elevation-z2 full-width-table">
+
+            <!-- Id -->
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <td mat-cell *matCellDef="let r">{{r.id}}</td>
+            </ng-container>
+
+            <!-- Categoría -->
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Categoría</th>
+                <td mat-cell *matCellDef="let r">{{r.category}}</td>
+            </ng-container>
+
+            <!-- Descripción -->
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                <td mat-cell *matCellDef="let r">{{r.description}}</td>
+            </ng-container>
+
+            <!-- Prioridad -->
+
+            <ng-container matColumnDef="priority">
+                <th mat-header-cell *matHeaderCellDef>Prioridad</th>
+                <td mat-cell *matCellDef="let r">
+
+                    <span class="priority-chip"
+                          [ngClass]="r.priority.toLowerCase()">
+
+                        {{r.priority}}
+
+                    </span>
+
+                </td>
+            </ng-container>
+
+            <!-- Estado -->
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+
+                <td mat-cell *matCellDef="let r">
+
+                    <span class="status-chip"
+                          [ngClass]="r.status.toLowerCase()">
+
+                        {{r.status}}
+
+                    </span>
+
+                </td>
+
+            </ng-container>
+
+            <!-- Fecha -->
+
+            <ng-container matColumnDef="date">
+
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+
+                <td mat-cell *matCellDef="let r">
+
+                    {{r.requestDate | date:'dd/MM/yyyy'}}
+
+                </td>
+
+            </ng-container>
+
+            <!-- Acciones -->
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+
+                <td mat-cell *matCellDef="let r">
+
+                    <button
+                        mat-icon-button
+                        color="primary"
+                        [routerLink]="['/detail', r.id]">
+
+                        <mat-icon>visibility</mat-icon>
+
+                    </button>
+
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+    </div>
 
 </div>
-<br>
-<app-metrics-dashboard></app-metrics-dashboard>
-
-<h1>
-Solicitudes de soporte
-</h1>
-
-<mat-card>
-
-
-<h3>Filtros</h3>
-
-
-<mat-select
-placeholder="Estado"
-[(ngModel)]="selectedStatus"
-(selectionChange)="filter()">
-
-
-<mat-option value="Pending">
-Pendiente
-</mat-option>
-
-
-<mat-option value="Approved">
-Aprobada
-</mat-option>
-
-
-<mat-option value="Rejected">
-Rechazada
-</mat-option>
-
-
-</mat-select>
-
-</mat-card>
-
-
-
-<br>
-
-
-<div *ngIf="loading">
-
-<mat-spinner></mat-spinner>
-
-</div>
-
-
-
-<table
-mat-table
-*ngIf="!loading"
-[dataSource]="filteredRequests">
-
-
-
-<ng-container matColumnDef="id">
-
-<th mat-header-cell *matHeaderCellDef>
-Id
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.id}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="category">
-
-<th mat-header-cell *matHeaderCellDef>
-Categoría
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.category}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="description">
-
-<th mat-header-cell *matHeaderCellDef>
-Descripción
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.description}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="priority">
-
-<th mat-header-cell *matHeaderCellDef>
-Prioridad
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.priority}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="status">
-
-<th mat-header-cell *matHeaderCellDef>
-Estado
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.status}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="date">
-
-<th mat-header-cell *matHeaderCellDef>
-Fecha
-</th>
-
-<td mat-cell *matCellDef="let r">
-
-{{r.requestDate | date}}
-
-</td>
-
-</ng-container>
-
-
-
-<ng-container matColumnDef="actions">
-
-<th mat-header-cell *matHeaderCellDef>
-Acciones
-</th>
-
-
-<td mat-cell *matCellDef="let r">
-
-
-<!-- Detalle -->
-<button
-mat-raised-button
-color="accent"
-[routerLink]="['/detail', r.id]">
-
-Detalle
-
-</button>
-
-</td>
-
-</ng-container>
-
-
-
-<tr
-mat-header-row
-*matHeaderRowDef="displayedColumns">
-</tr>
-
-
-<tr
-mat-row
-*matRowDef="let row; columns: displayedColumns;">
-</tr>
-
-
-</table>

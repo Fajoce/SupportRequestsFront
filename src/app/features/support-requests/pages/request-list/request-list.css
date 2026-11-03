@@ -3,3 +3,111 @@
     justify-content:flex-end;
     margin-bottom:20px;
 }
+.page-container{
+
+    width:95%;
+
+    margin:20px auto;
+
+}
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.filter-card{
+
+    margin:15px 0;
+
+}
+
+.table-container{
+
+    overflow:auto;
+
+}
+
+.full-width-table{
+
+    width:100%;
+
+}
+
+.spinner-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:30px;
+
+}
+
+.priority-chip,
+.status-chip{
+
+    padding:4px 10px;
+
+    border-radius:15px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    color:white;
+
+}
+
+/* Prioridades */
+
+.low{
+
+    background:#43a047;
+
+}
+
+.medium{
+
+    background:#fb8c00;
+
+}
+
+.high{
+
+    background:#e53935;
+
+}
+
+/* Estados */
+
+.pending{
+
+    background:#fb8c00;
+
+}
+
+.approved{
+
+    background:#43a047;
+
+}
+
+.rejected{
+
+    background:#d32f2f;
+
+}
+
+mat-form-field{
+
+    width:250px;
+
+}
